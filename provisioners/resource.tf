@@ -33,7 +33,7 @@ resource "aws_instance" "fifth-instance-tf" {
   key_name        = "fifth-key"
   security_groups = ["first-sg_5"]
   tags = {
-    Name = "third_ec2_tf"
+    Name = "fifth_ec2_tf"
   }
 
 
@@ -44,13 +44,13 @@ resource "aws_instance" "fifth-instance-tf" {
         host        = self.public_ip
   }
   provisioner "file" {
-    source      = "/home/ubuntu/git/terraform-begginers/provisionsers/demo"
-    destination = "/home/ubuntu/demo"  
+    source      = "/home/ubuntu/provisioners/file1"
+    destination = "/home/ubuntu/file1"  
   }
 
   provisioner "file" {
-      source = "/home/ubuntu/git/terraform-begginers/provisionsers/file10"
-      destination = "/home/ubuntu/file10"
+      source = "/home/ubuntu/provisioners/file2"
+      destination = "/home/ubuntu/file2"
   }
    
   provisioner "local-exec" {
