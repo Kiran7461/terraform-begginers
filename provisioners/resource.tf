@@ -1,8 +1,8 @@
 
 provider "aws" {
   region     = "us-east-1"
-  access_key = " "
-  secret_key = " "
+  access_key = "AKIAXJ43XSV2ZTOQ3AIP"
+  secret_key = "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"
 }
 
 #variables
@@ -22,16 +22,16 @@ variable "ports" {
 #resource 
 
 resource "aws_key_pair" "key-tf" {
-  key_name   = "third-key"
+  key_name   = "fifth-key"
   public_key = file("${path.module}/aws.pub")
 }
 
 
-resource "aws_instance" "third-instance-tf" {
+resource "aws_instance" "fifth-instance-tf" {
   ami             = var.ami
   instance_type   = var.instance_type
-  key_name        = "third-key"
-  security_groups = ["first-sg_3"]
+  key_name        = "fifth-key"
+  security_groups = ["first-sg_5"]
   tags = {
     Name = "third_ec2_tf"
   }
@@ -71,12 +71,12 @@ resource "aws_instance" "third-instance-tf" {
 
 #security group
 
-resource "aws_security_group" "sg-tf_3" {
-  name        = "first-sg_3"
+resource "aws_security_group" "sg-tf_5" {
+  name        = "first-sg_5"
   description = "Allow TLS inbound traffic"
 
   dynamic "ingress" {
-    for_each = var.ports
+    for_each = "${var.ports}"
     iterator = port
     content {
       from_port   = port.value
@@ -87,7 +87,7 @@ resource "aws_security_group" "sg-tf_3" {
   }
 
   dynamic "egress" {
-    for_each = var.ports
+    for_each = "${var.ports}"
     iterator = port
     content {
       from_port   = port.value
@@ -98,6 +98,6 @@ resource "aws_security_group" "sg-tf_3" {
   }
 
   tags = {
-    Name = "TF-sg_3"
+    Name = "TF-sg_5"
   }
 }
